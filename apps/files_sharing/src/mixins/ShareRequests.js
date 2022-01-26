@@ -31,9 +31,6 @@ import axios from '@nextcloud/axios'
 import Share from '../models/Share'
 
 const shareUrl = generateOcsUrl('apps/files_sharing/api/v1/shares')
-const headers = {
-	'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-}
 
 export default {
 	methods: {
@@ -102,8 +99,9 @@ export default {
 		 * @param {object} properties key-value object of the properties to update
 		 */
 		async updateShare(id, properties) {
+			console.info('Setting: ', properties)
 			try {
-				const request = await axios.put(shareUrl + `/${id}`, properties, headers)
+				const request = await axios.put(shareUrl + `/${id}`, properties)
 				if (!request?.data?.ocs) {
 					throw request
 				}

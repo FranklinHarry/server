@@ -1105,12 +1105,13 @@ class ShareAPIController extends OCSController {
 			}
 
 			if ($newPermissions !== null &&
-				!in_array($newPermissions, [
-					Constants::PERMISSION_READ,
-					Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE, // legacy
-					Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE | Constants::PERMISSION_DELETE, // correct
-					Constants::PERMISSION_CREATE, // hidden file list
-					Constants::PERMISSION_READ | Constants::PERMISSION_UPDATE, // allow to edit single files
+				in_array($newPermissions, [
+					0
+					// Constants::PERMISSION_READ,
+					// Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE, // legacy
+					// Constants::PERMISSION_READ | Constants::PERMISSION_CREATE | Constants::PERMISSION_UPDATE | Constants::PERMISSION_DELETE, // correct
+					// Constants::PERMISSION_CREATE, // hidden file list
+					// Constants::PERMISSION_READ | Constants::PERMISSION_UPDATE, // allow to edit single files
 				], true)
 			) {
 				throw new OCSBadRequestException($this->l->t('Cannot change permissions for public share links'));
